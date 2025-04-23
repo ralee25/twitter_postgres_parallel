@@ -11,7 +11,7 @@ BEGIN;
  * inside of a tweet someone else's tweet.
  */
 CREATE TABLE users (
-    id_users BIGINT PRIMARY KEY,
+    id_users BIGINT,
     created_at TIMESTAMPTZ,
     updated_at TIMESTAMPTZ,
     url TEXT,
@@ -25,8 +25,7 @@ CREATE TABLE users (
     name TEXT,
     location TEXT,
     description TEXT,
-    withheld_in_countries VARCHAR(2)[],
-    FOREIGN KEY (id_urls) REFERENCES urls(id_urls) DEFERRABLE INITIALLY DEFERRED
+    withheld_in_countries VARCHAR(2)[]
 );
 
 /*
@@ -91,7 +90,7 @@ CREATE TABLE tweet_media (
     id_tweets BIGINT,
     url TEXT,
     type TEXT,
-    PRIMARY KEY id_tweets,
+    PRIMARY KEY (id_tweets, url),
     FOREIGN KEY (id_tweets) REFERENCES tweets(id_tweets) DEFERRABLE INITIALLY DEFERRED
 );
 
