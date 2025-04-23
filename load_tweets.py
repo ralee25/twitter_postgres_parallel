@@ -316,6 +316,10 @@ def insert_tweet(connection,tweet):
                 VALUES (:id_tweets, :id_urls)
                 ON CONFLICT DO NOTHING
                 ''')
+            connection.execute(sql, {
+                'id_tweets': tweet['id'],
+                'id_urls': id_urls
+            })
 
         ########################################
         # insert into the tweet_mentions table
